@@ -1,0 +1,312 @@
+#include <Servo.h>
+
+// put your main code here, to run repeatedly:
+
+
+// Declaramos la variable para controlar el servo
+Servo servoMotor1;
+Servo servoMotor2;
+Servo servoMotor3;
+Servo servoMotor4;
+Servo servoMotor5;
+
+const int buttonPin = 3;
+
+int buttonState = 0;         // variable for reading the pushbutton status
+
+
+
+void setup() {
+  // Iniciamos el monitor serie para mostrar el resultado
+  Serial.begin(9600);
+
+  // Iniciamos el servos
+  servoMotor1.attach(11);
+  servoMotor2.attach(10);
+  servoMotor3.attach(9);
+  servoMotor4.attach(6);
+  servoMotor5.attach(5);
+
+  pinMode(buttonPin, INPUT);
+
+
+}
+
+void loop() {
+
+  // Primera fase aleatoria con un sólo click
+
+  if (digitalRead(buttonPin) == HIGH) {
+
+    int i = random(3);
+
+    if (i == 0) {
+      seq0();
+    } else if (i == 1) {
+      seq1();
+    } else if (i == 2) {
+      seq2();
+    }
+
+
+
+    long start = millis();
+    while (digitalRead(buttonPin) == HIGH) {
+      if (millis() - start > 8000) { // Mantener botón 8 seg para Butifarra
+
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  delay(1000); // 1 sec
+
+        
+        seqButi();
+      } else if (millis() - start > 2500) { // Mantener botón 2,5 seg para Agonizar
+        seqAgonitzar();
+      }
+    }
+  }
+
+
+}
+
+// Parar motor después de utilizarlo
+
+void setServo(Servo s, int pin, int angle) {
+
+  s.attach(pin);
+  s.write(angle);
+  delay(100);
+  s.detach();
+}
+
+// Dits total espasmo x2
+void seq0() {
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  // Esperamos medio segundo
+  delay(500);
+
+  // Desplazamos a la posición Espasmo TOTAL
+  servoMotor1.write(70);
+  servoMotor2.write(50);
+  servoMotor3.write(150);
+  servoMotor4.write(120);
+  servoMotor5.write(90);
+  delay(500);
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  delay(500);
+
+  // Desplazamos a la posición Espasmo TOTAL
+  servoMotor1.write(70);
+  servoMotor2.write(50);
+  servoMotor3.write(150);
+  servoMotor4.write(120);
+  servoMotor5.write(90);
+  delay(500);
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+
+
+
+}
+
+// ABANICO
+void seq1() {
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  // Esperamos medio segundo
+  delay(500);
+
+  // Desplazamos a la posición 5 (THUMB)
+  servoMotor5.write(90);
+  // Esperamos medio segundo
+  delay(100);
+
+
+  // Desplazamos a la posición 4 (INDEX)
+  servoMotor4.write(120);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 3 (MIDDLE)
+  servoMotor3.write(150);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 2 (RING)
+  servoMotor2.write(40);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 1 (PINKY )
+  servoMotor1.write(70);
+  delay(700);
+
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  delay(300);
+
+  // Desplazamos a la posición 5
+  servoMotor5.write(90);
+  // Esperamos medio segundo
+  delay(100);
+
+
+  // Desplazamos a la posición 4
+  servoMotor4.write(120);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 3
+  servoMotor3.write(150);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 2
+  servoMotor2.write(40);
+  // Esperamos medio segundo
+  delay(100);
+
+  // Desplazamos a la posición 1
+  servoMotor1.write(70);
+  delay(700);
+
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+
+
+}
+
+// Come Here
+void seq2() {
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  // Esperamos medio segundo
+  delay(700);
+
+  // Tancar puny
+  servoMotor1.write(70);
+  servoMotor3.write(150);
+  servoMotor4.write(120);
+  servoMotor5.write(90);
+  // Esperamos medio segundo
+  delay(700);
+
+  // DIT 2
+  servoMotor2.write(50);
+  // Esperamos medio segundo
+  delay(500);
+
+  // RELAX
+  servoMotor2.write(180);
+  // Esperamos medio segundo
+  delay(500);
+
+  // DIT 2
+  servoMotor2.write(50);
+  // Esperamos medio segundo
+  delay(500);
+
+  // RELAX
+  servoMotor2.write(180);
+  // Esperamos medio segundo
+  delay(500);
+
+  // DIT 2
+  servoMotor2.write(50);
+  // Esperamos medio segundo
+  delay(500);
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+  // Esperamos medio segundo
+
+}
+
+void seqButi() {
+
+  servoMotor1.write(70);
+  servoMotor2.write(50);
+  //servoMotor3.write(150);
+  servoMotor4.write(120);
+  servoMotor5.write(90);
+  delay(2000);
+
+  // Desplazamos a la posición INICIAL
+  servoMotor1.write(180);
+  servoMotor2.write(180);
+  servoMotor3.write(0);
+  servoMotor4.write(0);
+  servoMotor5.write(10);
+
+}
+
+
+void seqAgonitzar() {
+
+  // Desplazamos a la posición INICIAL
+
+  servoMotor5.write(90);
+  servoMotor2.write(180);
+  delay(200);
+
+  servoMotor4.write(120);
+  servoMotor1.write(180);
+  delay(200);
+
+  servoMotor3.write(150);
+  servoMotor5.write(10);
+  delay(200);
+
+  servoMotor2.write(50);
+  servoMotor4.write(0);
+  delay(200);
+
+  servoMotor1.write(70);
+  servoMotor3.write(0);
+  delay(200);
+
+}
